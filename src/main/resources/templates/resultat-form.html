@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout :: head}"></div>
+</head>
+<body>
+<div th:replace="~{layout :: nav}"></div>
+<div class="container mt-4">
+    <h1>Calcul de Note Finale</h1>
+    
+    <form th:action="@{/resultat}" method="post" class="mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <select name="candidatId" class="form-select" required>
+                    <option value="">Sélectionner Candidat</option>
+                    <option th:each="c : ${candidats}" th:value="${c.id}" th:text="${c.nom}"></option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select name="matiereId" class="form-select" required>
+                    <option value="">Sélectionner Matiere</option>
+                    <option th:each="m : ${matieres}" th:value="${m.id}" th:text="${m.nom}"></option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success">Calculer Note Finale</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
