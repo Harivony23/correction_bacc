@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout :: head}"></div>
+</head>
+<body>
+<div th:replace="~{layout :: nav}"></div>
+<div class="container mt-4">
+    <h1>Paramètres</h1>
+    
+    <form th:action="@{/parametres}" method="post" class="mb-4">
+        <div class="row">
+            <div class="col-md-3">
+                <select name="matiere" class="form-select" required>
+                    <option value="">Sélectionner Matiere</option>
+                    <option th:each="m : ${matieres}" th:value="${m.id}" th:text="${m.nom}"></option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="number" step="0.01" name="diff" class="form-control" placeholder="Diff (Seuil)" required>
+            </div>
+            <div class="col-md-2">
+                <select name="operateur" class="form-select" required>
+                    <option value="">Opérateur</option>
+                    <option th:each="o : ${operateurs}" th:value="${o.id}" th:text="${o.operateur}"></option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="resolution" class="form-select" required>
+                    <option value="">Résolution</option>
+                    <option th:each="r : ${resolutions}" th:value="${r.id}" th:text="${r.nom}"></option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Matière</th>
+            <th>Diff</th>
+            <th>Opérateur</th>
+            <th>Résolution</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="el : ${elements}">
+            <td th:text="${el.id}"></td>
+            <td th:text="${el.matiere.nom}"></td>
+            <td th:text="${el.diff}"></td>
+            <td th:text="${el.operateur.operateur}"></td>
+            <td th:text="${el.resolution.nom}"></td>
+            <td>
+                <a th:href="@{/parametres/delete/{id}(id=${el.id})}" class="btn btn-danger btn-sm">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

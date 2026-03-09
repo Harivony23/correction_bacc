@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout :: head}"></div>
+</head>
+<body>
+<div th:replace="~{layout :: nav}"></div>
+<div class="container mt-4">
+    <h1>Résultat</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Note Finale de <span th:text="${candidat?.nom}"></span></h5>
+            <p class="card-text">
+                Matière : <strong th:text="${matiere?.nom}"></strong>
+            </p>
+            <h2 class="text-primary" th:text="${finalNote != null ? finalNote : 'Aucune note disponible'}"></h2>
+            
+            <a href="/resultat" class="btn btn-secondary mt-3">Retour</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
